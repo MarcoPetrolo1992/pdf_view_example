@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:pdf_view_example/base/base_view_model.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
@@ -17,7 +18,7 @@ class PdfViewerViewModel extends BaseViewModel {
 
   String errorMessage = '';
 
-  late XFile _file;
+  late File _file;
 
   //----------------------------------------------------------------------------
 
@@ -100,8 +101,8 @@ class PdfViewerViewModel extends BaseViewModel {
 
   ///
   void onShare() async {
-    await Share.shareXFiles(
-      [_file],
+    await Share.shareFiles(
+      [_file.path],
     );
   }
 

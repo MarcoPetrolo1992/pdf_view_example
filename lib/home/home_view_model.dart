@@ -18,7 +18,7 @@ class HomeViewModel extends BaseViewModel {
 
   String filePath = "";
 
-  XFile? file;
+  File? file;
 
   //----------------------------------------------------------------------------
 
@@ -62,20 +62,14 @@ class HomeViewModel extends BaseViewModel {
   }
 
   ///
-  Future<XFile> fromAsset(String asset, String filename) async {
-    // To open from assets, you can copy them to the app storage folder, and the access them "locally"
-    Completer<XFile> completer = Completer();
-
+  Future<File> fromAsset(String asset, String filename) async {
     try {
       var dir = await getApplicationDocumentsDirectory();
       var data = await rootBundle.load(asset);
       var bytes = data.buffer.asUint8List();
-      XFile file = XFile.fromData(
-        bytes,
-        name: filename,
-        mimeType: "application/pdf",
-        path: "${dir.path}/$filename",
-      );
+      File file = File('${dir.path}/$filename');
+      await file.writeAsBytes(bytes);
+
       return file;
     } catch (e) {
       throw Exception('Error parsing asset file!');
