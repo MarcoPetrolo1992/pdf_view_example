@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:pdf_view_example/base/base_view_model.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:share_plus/share_plus.dart';
@@ -101,8 +102,14 @@ class PdfViewerViewModel extends BaseViewModel {
 
   ///
   void onShare() async {
-    await Share.shareFiles(
-      [_file.path],
+
+    var xfile = XFile.fromData(_file.readAsBytesSync(),mimeType: "application/pdf",);
+    // _onShare method:
+    final box = context.findRenderObject() as RenderBox?;
+
+    await Share.shareXFiles(
+      [xfile],
+      sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
     );
   }
 

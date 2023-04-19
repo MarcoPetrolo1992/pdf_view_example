@@ -9,7 +9,6 @@ import 'package:pdf_view_example/base/base_view_model.dart';
 import 'package:pdf_view_example/pdfViewer/pdf_viewer_screen.dart';
 import 'package:pdf_view_example/pdfViewer/pdf_viewer_view_model.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
 
 class HomeViewModel extends BaseViewModel {
   //----------------------------------------------------------------------------
@@ -46,7 +45,6 @@ class HomeViewModel extends BaseViewModel {
   Future<File> fromPdf() async {
     final pdf = pw.Document();
 
-
     pdf.addPage(
       pw.Page(
         build: (pw.Context context) => pw.Center(
@@ -64,7 +62,8 @@ class HomeViewModel extends BaseViewModel {
   ///
   Future<File> fromAsset(String asset, String filename) async {
     try {
-      var dir = await getApplicationDocumentsDirectory();
+      var dir = await getTemporaryDirectory();
+
       var data = await rootBundle.load(asset);
       var bytes = data.buffer.asUint8List();
       File file = File('${dir.path}/$filename');
