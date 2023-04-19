@@ -65,8 +65,7 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> with InitBaseViewMode
           pageSnap: true,
           defaultPage: viewModel.currentPage!,
           fitPolicy: FitPolicy.BOTH,
-          preventLinkNavigation:
-          false, // if set to true the link is handled in flutter
+          preventLinkNavigation: false, // if set to true the link is handled in flutter
           onRender: viewModel.onRender,
           onError: viewModel.onError,
           onPageError: viewModel.onPageError,
