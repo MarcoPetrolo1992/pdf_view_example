@@ -43,9 +43,19 @@ class _HomeScreenState extends State<HomeScreen> with InitBaseViewModel<HomeView
         title: const Text("Home"),
       ),
       child: Center(
-        child: TextButton(
-          onPressed: viewModel.navigateToPdfViewer,
-          child: const Text("Open PDF"),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+              onPressed: viewModel.navigateToPdfViewer,
+              child: const Text("Open PDF"),
+            ),
+            TextButton(
+              onPressed: viewModel.sharePdf,
+              child: const Text("Share PDF from base64"),
+            ),
+          ],
         ),
       ),
     );

@@ -102,8 +102,10 @@ class PdfViewerViewModel extends BaseViewModel {
 
   ///
   void onShare() async {
-
-    var xfile = XFile.fromData(_file.readAsBytesSync(),mimeType: "application/pdf",);
+    var xfile = XFile.fromData(
+      _file.readAsBytesSync(),
+      mimeType: "application/pdf",
+    );
     // _onShare method:
     final box = context.findRenderObject() as RenderBox?;
 
@@ -112,6 +114,14 @@ class PdfViewerViewModel extends BaseViewModel {
       sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
     );
   }
+
+/*  _sharePDF() async {
+
+    await Printing.sharePdf(
+      bytes: await _buildDocumentFromBarcode().save(),
+      filename: 'barcode_${DateTime.now().millisecondsSinceEpoch}.pdf',
+    );
+  }*/
 
 //----------------------------------------------------------------------------
 }

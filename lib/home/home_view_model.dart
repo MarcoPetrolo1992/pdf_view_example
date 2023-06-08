@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +9,7 @@ import 'dart:io';
 import 'package:pdf_view_example/base/base_view_model.dart';
 import 'package:pdf_view_example/pdfViewer/pdf_viewer_screen.dart';
 import 'package:pdf_view_example/pdfViewer/pdf_viewer_view_model.dart';
+import 'package:printing/printing.dart';
 import 'package:provider/provider.dart';
 
 class HomeViewModel extends BaseViewModel {
@@ -102,6 +104,16 @@ class HomeViewModel extends BaseViewModel {
           child: const PdfViewerScreen(),
         ),
       ),
+    );
+  }
+
+
+  void sharePdf() async {
+    String base64 = await rootBundle.loadString("assets/base64.txt");
+
+    await Printing.sharePdf(
+      bytes: base64Decode(base64),
+      filename: 'barcode_${DateTime.now().millisecondsSinceEpoch}.pdf',
     );
   }
 
